@@ -27,7 +27,7 @@
             min-height: 100vh;
         }
         header {
-            background: linear-gradient(135deg, #1976d2, #2196f3);
+            background: linear-gradient(135deg, #1976d2, #2196f3, #64b5f6); /* تدرج أزرق */
             color: white;
             padding: 20px;
             width: 100%;
@@ -62,6 +62,8 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            width: 100%;
+            padding: 20px;
         }
         .main-content h2 {
             font-size: 28px;
@@ -85,8 +87,98 @@
         .main-content button:hover {
             background: linear-gradient(135deg, #2ecc71, #27ae60);
         }
+        section {
+            padding: 40px 20px;
+            width: 100%;
+            background: #fff;
+            margin: 20px 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        section:hover {
+            transform: translateY(-10px); /* تأثير رفع القسم */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* زيادة الظل */
+        }
+        section h2 {
+            font-size: 32px;
+            color: #1976d2;
+            margin-bottom: 20px;
+        }
+        .services, .team, .clients, .pricing, .contact {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+        .service-card, .team-member, .client-logo, .pricing-card {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .service-card:hover, .team-member:hover, .client-logo:hover, .pricing-card:hover {
+            transform: translateY(-10px); /* تأثير رفع البطاقة */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* زيادة الظل */
+        }
+        .service-card i, .team-member img, .client-logo img, .pricing-card h3 {
+            font-size: 40px;
+            color: #1976d2;
+            margin-bottom: 10px;
+        }
+        .team-member img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .client-logo img {
+            width: 150px;
+            height: auto;
+        }
+        .pricing-card h3 {
+            font-size: 24px;
+            color: #27ae60;
+        }
+        .pricing-card p {
+            font-size: 20px;
+            color: #333;
+        }
+        .pricing-card ul {
+            list-style: none;
+            padding: 0;
+        }
+        .pricing-card ul li {
+            margin: 10px 0;
+        }
+        .contact form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        .contact input, .contact textarea {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            font-family: 'Cairo', sans-serif;
+        }
+        .contact button {
+            padding: 10px 20px;
+            border: none;
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            color: white;
+            cursor: pointer;
+            font-size: 18px;
+            border-radius: 5px;
+        }
         footer {
-            background: linear-gradient(135deg, #1976d2, #2196f3);
+            background: linear-gradient(135deg, #1976d2, #2196f3, #64b5f6); /* تدرج أزرق */
             color: white;
             padding: 15px;
             width: 100%;
@@ -96,6 +188,21 @@
         }
         footer p {
             margin: 5px 0;
+        }
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 10px;
+        }
+        .social-icons a {
+            color: white;
+            font-size: 24px;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+        .social-icons a:hover {
+            color: #ffeb3b; /* لون أصفر عند التمرير */
+            transform: translateY(-5px); /* تأثير رفع الأيقونة */
         }
     </style>
 </head>
@@ -113,15 +220,130 @@
             <i class="fas fa-sign-in-alt"></i> الانتقال إلى استيراد وتصدير جهات الاتصال
         </button>
     </div>
+
+    <!-- قسم خدماتنا -->
+    <section id="services">
+        <h2>خدماتنا</h2>
+        <div class="services">
+            <div class="service-card">
+                <i class="fas fa-code"></i>
+                <h3>تطوير الويب</h3>
+                <p>نقدم حلول تطوير ويب متكاملة.</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-mobile-alt"></i>
+                <h3>تطبيقات الجوال</h3>
+                <p>تصميم وتطوير تطبيقات الجوال.</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-paint-brush"></i>
+                <h3>تصميم جرافيك</h3>
+                <p>تصميمات إبداعية واحترافية.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم فريق العمل -->
+    <section id="team">
+        <h2>فريق العمل</h2>
+        <div class="team">
+            <div class="team-member">
+                <img src="team1.jpg" alt="عبدالله الرجوي">
+                <h3>عبدالله الرجوي</h3>
+                <p>مطور ويب</p>
+            </div>
+            <div class="team-member">
+                <img src="team2.jpg" alt="محمد أحمد">
+                <h3>محمد أحمد</h3>
+                <p>مصمم جرافيك</p>
+            </div>
+            <div class="team-member">
+                <img src="team3.jpg" alt="سارة خالد">
+                <h3>سارة خالد</h3>
+                <p>مديرة مشاريع</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم عملاؤنا -->
+    <section id="clients">
+        <h2>عملاؤنا</h2>
+        <div class="clients">
+            <div class="client-logo">
+                <img src="client1.png" alt="عميل 1">
+            </div>
+            <div class="client-logo">
+                <img src="client2.png" alt="عميل 2">
+            </div>
+            <div class="client-logo">
+                <img src="client3.png" alt="عميل 3">
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم الأسعار -->
+    <section id="pricing">
+        <h2>الأسعار</h2>
+        <div class="pricing">
+            <div class="pricing-card">
+                <h3>الباقة الأساسية</h3>
+                <p>100$</p>
+                <ul>
+                    <li>تطوير موقع ويب</li>
+                    <li>دعم فني لمدة شهر</li>
+                </ul>
+            </div>
+            <div class="pricing-card">
+                <h3>الباقة المتوسطة</h3>
+                <p>200$</p>
+                <ul>
+                    <li>تطوير موقع ويب</li>
+                    <li>تصميم جرافيك</li>
+                    <li>دعم فني لمدة 3 أشهر</li>
+                </ul>
+            </div>
+            <div class="pricing-card">
+                <h3>الباقة المتقدمة</h3>
+                <p>300$</p>
+                <ul>
+                    <li>تطوير موقع ويب</li>
+                    <li>تصميم جرافيك</li>
+                    <li>تطبيق جوال</li>
+                    <li>دعم فني لمدة 6 أشهر</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم اتصل بنا -->
+    <section id="contact">
+        <h2>اتصل بنا</h2>
+        <div class="contact">
+            <form>
+                <input type="text" placeholder="الاسم" required>
+                <input type="email" placeholder="البريد الإلكتروني" required>
+                <textarea placeholder="الرسالة" rows="5" required></textarea>
+                <button type="submit">إرسال</button>
+            </form>
+        </div>
+    </section>
+
     <footer>
         <p><i class="fas fa-user"></i> تصميم / م.عبدالله الرجوي</p>
         <p><i class="fas fa-phone"></i> تـ / 772237880</p>
         <p><i class="fas fa-copyright"></i> جميع الحقوق محفوظة © 2025</p>
+        <!-- أيقونات وسائل التواصل الاجتماعي -->
+        <div class="social-icons">
+            <a href="https://www.facebook.com/A.Alrajawi7" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="https://wa.me/772237880" target="_blank"><i class="fab fa-whatsapp"></i></a> <!-- أيقونة الواتساب -->
+            <a href="https://www.twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.linkedin.com" target="_blank"><i class="fab fa-linkedin"></i></a>
+        </div>
     </footer>
     <script>
-     
-        const hashedPassword = "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4"; // هاش   ""
-
+       
+        const hashedPassword = "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4"; 
         function checkPassword() {
             // طلب كلمة المرور من المستخدم
             Swal.fire({
