@@ -43,6 +43,7 @@
             border-radius: 15px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
             flex: 1;
+            display: none; /* إخفاء المحتوى حتى يتم التحقق من كلمة المرور */
         }
         h2 {
             color: #2c3e50;
@@ -172,7 +173,7 @@
     <script>
         let contacts = [];
 
-     
+      
         const hashedPassword = "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4"; 
 
         function checkPassword() {
@@ -204,20 +205,18 @@
 
                     // التحقق من تطابق الهاش
                     if (userHashedPassword === hashedPassword) {
-                        // إذا كانت كلمة المرور صحيحة، السماح بالوصول
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'تم الدخول بنجاح!',
-                            text: 'يمكنك الآن استيراد جهات الاتصال.',
-                            timer: 2000,
-                            showConfirmButton: false
-                        });
+                        // إذا كانت كلمة المرور صحيحة، إظهار المحتوى
+                        document.querySelector('.container').style.display = 'block';
                     } else {
-                        // إذا كانت كلمة المرور خاطئة، عرض رسالة خطأ
+                        // إذا كانت كلمة المرور خاطئة، عرض رسالة خطأ وإعادة التوجيه
                         Swal.fire({
                             icon: 'error',
                             title: 'كلمة المرور غير صحيحة',
-                            text: 'الرجاء المحاولة مرة أخرى.',
+                            text: 'سيتم إعادة توجيهك إلى الصفحة الرئيسية.',
+                            timer: 2000,
+                            showConfirmButton: false
+                        }).then(() => {
+                            window.location.href = "index.html"; // إعادة التوجيه إلى الصفحة الرئيسية
                         });
                     }
                 }
