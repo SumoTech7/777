@@ -6,6 +6,10 @@
     <title>استيراد جهات الاتصال</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600&family=Tajawal:wght@400;500&display=swap" rel="stylesheet">
+    <!-- إضافة مكتبة SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- إضافة مكتبة CryptoJS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
     <style>
         body {
             font-family: 'Cairo', 'Tajawal', 'Arial', sans-serif;
@@ -20,7 +24,7 @@
             min-height: 100vh;
         }
         header {
-            background: linear-gradient(135deg, #1976d2, #2196f3);
+            background: linear-gradient(135deg, #1976d2, #2196f3, #64b5f6); /* تدرج أزرق */
             color: white;
             padding: 20px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -104,7 +108,7 @@
             font-family: 'Cairo', sans-serif;
         }
         footer {
-            background: linear-gradient(135deg, #1976d2, #2196f3);
+            background: linear-gradient(135deg, #1976d2, #2196f3, #64b5f6); /* تدرج أزرق */
             color: white;
             padding: 15px;
             font-family: 'Cairo', sans-serif;
@@ -114,11 +118,25 @@
         footer p {
             margin: 5px 0;
         }
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 10px;
+        }
+        .social-icons a {
+            color: white;
+            font-size: 24px;
+            transition: color 0.3s ease;
+        }
+        .social-icons a:hover {
+            color: #ffeb3b; /* لون أصفر عند التمرير */
+        }
     </style>
 </head>
 <body>
     <header>
-        <h1>Sam Tech</h1>
+        <h1>استيراد جهات الاتصال</h1>
     </header>
     <div class="container">
         <h2>استيراد جهات الاتصال من ملف</h2>
@@ -139,13 +157,76 @@
         </table>
     </div>
     <footer>
-        <p>تصميم / م.عبدالله الرجوي</p>
-        <p>تـ / 772237880</p>
-        <p>جميع الحقوق محفوظة © 2025</p>
+        <p><i class="fas fa-user"></i> تصميم / م.عبدالله الرجوي</p>
+        <p><i class="fas fa-phone"></i> تـ / 772237880</p>
+        <p><i class="fas fa-copyright"></i> جميع الحقوق محفوظة © 2025</p>
+        <!-- أيقونات وسائل التواصل الاجتماعي -->
+        <div class="social-icons">
+            <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="https://wa.me/772237880" target="_blank"><i class="fab fa-whatsapp"></i></a> <!-- أيقونة الواتساب -->
+            <a href="https://www.twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.linkedin.com" target="_blank"><i class="fab fa-linkedin"></i></a>
+        </div>
     </footer>
     <script>
         let contacts = [];
-        
+
+        // كلمة المرور المشفرة باستخدام SHA-256 (هاش)
+        const hashedPassword = "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4"; // هاش كلمة المرور "1234"
+
+        function checkPassword() {
+            // طلب كلمة المرور من المستخدم
+            Swal.fire({
+                title: 'أدخل كلمة المرور',
+                input: 'password',
+                inputAttributes: {
+                    autocapitalize: 'off',
+                    autocorrect: 'off'
+                },
+                showCancelButton: true,
+                confirmButtonText: 'دخول',
+                cancelButtonText: 'إلغاء',
+                showLoaderOnConfirm: true,
+                preConfirm: (password) => {
+                    if (!password) {
+                        Swal.showValidationMessage('يجب إدخال كلمة المرور');
+                    }
+                    return password;
+                },
+                allowOutsideClick: () => !Swal.isLoading()
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    const userPassword = result.value;
+
+                    // تشفير كلمة المرور المدخلة باستخدام SHA-256
+                    const userHashedPassword = CryptoJS.SHA256(userPassword).toString();
+
+                    // التحقق من تطابق الهاش
+                    if (userHashedPassword === hashedPassword) {
+                        // إذا كانت كلمة المرور صحيحة، السماح بالوصول
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'تم الدخول بنجاح!',
+                            text: 'يمكنك الآن استيراد جهات الاتصال.',
+                            timer: 2000,
+                            showConfirmButton: false
+                        });
+                    } else {
+                        // إذا كانت كلمة المرور خاطئة، عرض رسالة خطأ
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'كلمة المرور غير صحيحة',
+                            text: 'الرجاء المحاولة مرة أخرى.',
+                        });
+                    }
+                }
+            });
+        }
+
+        // التحقق من كلمة المرور عند تحميل الصفحة
+        window.onload = checkPassword;
+
         document.getElementById('fileInput').addEventListener('change', function(event) {
             const file = event.target.files[0];
             if (!file) return;
